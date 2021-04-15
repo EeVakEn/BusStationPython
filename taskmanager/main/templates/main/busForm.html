@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block content %}
+<h1>{{title}}</h1>
+<form method="post" autocomplete="off">
+  {% csrf_token %}
+  {{form.board_number|as_crispy_field}}<br>
+  {{form.regist_number|as_crispy_field}}<br>
+  {{form.number_of_places|as_crispy_field}}<br>
+  {{form.mark|as_crispy_field}}<br>
+    <button type="submit" class="btn btn-info">Сохранить</button>
+</form>
+{% endblock %}

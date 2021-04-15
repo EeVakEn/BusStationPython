@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block content %}
+
+<h1>Маршруты</h1>
+<br>
+<a type="button" class="btn btn-info mb-2" href="{%url 'addRoute'%}">Добавить</a>
+<table  class="table table-striped" >
+  <thead>
+     <tr >
+        <th scope="col">ID</th>
+        <th scope="col">Номер маршрута</th>
+        <th scope="col">Пункт отправления</th>
+        <th scope="col">Пункт назначения</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+     </tr>
+  </thead>
+  <tbody>
+    {% for el in routes %}
+    <tr>
+      <th scope="row">{{el.id}}</th>
+      <td>{{el.route_number}}</td>
+      <td>{{el.stop_from_address}}</td>
+      <td>{{el.stop_to_address}}</td>
+        <td>
+              <a type="button" class="btn btn-secondary m-1" href="{%url 'updateRoute' el.id%}">
+                  Изменить
+              </a>
+        </td>
+      <td>
+          <form method="post" action="{% url 'delRoute' id_route=el.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger m-1" >
+                  Удалить
+              </button>
+          </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+
+{% endblock %}

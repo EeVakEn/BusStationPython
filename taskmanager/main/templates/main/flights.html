@@ -1,0 +1,55 @@
+{% extends 'main/base.html' %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block content %}
+
+<h1>Рейсы</h1>
+
+<br>
+<a type="button" class="btn btn-info mb-2" href="{%url 'addFlight'%}">Добавить</a>
+<table  class="table table-striped" >
+  <thead>
+     <tr >
+        <th scope="col">ID</th>
+        <th scope="col">Водитель</th>
+        <th scope="col">Автобус</th>
+        <th scope="col">Маршрут</th>
+        <th scope="col">Цена билета</th>
+        <th scope="col">Время отправления</th>
+        <th scope="col">Время прибытия</th>
+         <th scope="col"></th>
+        <th scope="col"></th>
+     </tr>
+  </thead>
+  <tbody>
+    {% for el in flights %}
+    <tr>
+      <th scope="row">{{el.id}}</th>
+      <td>{{el.driver}}</td>
+      <td>{{el.id_bus}}</td>
+      <td>{{el.id_route}}</td>
+      <td>{{el.ticket_price}}</td>
+      <td>{{el.departure_time}}</td>
+      <td>{{el.arrival_time}}</td>
+        <td>
+              <a type="button" class="btn btn-secondary m-1" href="{%url 'updateFlight' el.id%}">
+                  Изменить
+              </a>
+        </td>
+      <td>
+          <form method="post" action="{% url 'delFlight' id_flight=el.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger m-1" >
+                  Удалить
+              </button>
+          </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+
+
+{% endblock %}

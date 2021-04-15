@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block content %}
+<h1>{{title}}</h1>
+<form method="post" autocomplete="off">
+  {% csrf_token %}
+  <div class="form-floating mb-3">
+    {{form.flight_num|as_crispy_field}}
+  </div>
+  <br>
+  <div class="form-floating mb-3">
+    {{form.driver|as_crispy_field}}
+  </div>
+  <br>
+  <div class="form-floating mb-3">
+    {{form.id_bus|as_crispy_field}}
+  </div>
+  <br>
+  <div class="form-floating mb-3">
+    {{form.id_route|as_crispy_field}}
+  </div>
+  <br>
+  <div class="form-floating mb-3">
+    {{form.ticket_price|as_crispy_field}}
+  </div>
+  <br>
+
+  <div class="row">
+
+    <div class="col-md-6">
+      {{form.departure_time|as_crispy_field}}
+    </div>
+    <div class="col-md-6">
+      {{form.arrival_time|as_crispy_field}}
+    </div>
+  </div><br>
+
+
+  <button type="submit" class="btn btn-info">Сохранить</button>
+</form>
+{% endblock %}

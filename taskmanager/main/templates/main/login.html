@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Логин
+{% endblock title %}
+{% block content %}
+
+<br><br><br><br><br><br>
+<main class="form-signin text-center col-md-4 m-auto align-self-center align-items-center ">
+  <h1 class="h3 mb-3 fw-normal">Авторизация</h1>
+  <hr>
+  <form method="post" autocomplete="off">
+  {% csrf_token %}
+
+    {{form|crispy}}
+    <br>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+
+  </form>
+</main>
+
+
+{% endblock %}

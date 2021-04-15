@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block content %}
+
+    <h1>Автобусы</h1>
+      <br>
+      <a type="button" class="btn btn-info mb-2" href="{%url 'addBus'%}">Добавить</a>
+            <table  class="table table-striped" >
+              <thead>
+                 <tr >
+                    <th scope="col">ID</th>
+                    <th scope="col">Бортовый номер</th>
+                    <th scope="col">Регистрационный номер</th>
+                    <th scope="col">Число мест</th>
+                    <th scope="col">Марка</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                 </tr>
+              </thead>
+              <tbody>
+                {% for el in buses %}
+                <tr>
+                  <th scope="row">{{el.id}}</th>
+                  <td>{{el.board_number}}</td>
+                  <td>{{el.regist_number}}</td>
+                  <td>{{el.number_of_places}}</td>
+                  <td>{{el.mark}}</td>
+                  <td>
+                      <a type="button" class="btn btn-secondary m-1" href="{%url 'updateBus' el.id%}">
+                          Изменить
+                      </a>
+                  </td>
+
+                  <td>
+                      <form method="post" action="{% url 'delBus' id_bus=el.id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger m-1" >
+                              Удалить
+                          </button>
+                      </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+
+            </table>
+
+
+{% endblock %}
